@@ -6,8 +6,51 @@
 
 <body>
 
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <div id="compra">R$ 10,00</div>
+                </td>
+                <td>
+                    <input type="number">
+                </td>
+            </tr>
+        </tbody>
+        <tr>
+            <td></td>
+
+            <td>Total da compra</td>
+            <td>
+                <div id="total">R$ 30,00</div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+
 </body>
 <script type="text/javascript">
+    var total = document.getElementById("total").innerHTML;
+    var formattedText = floatToMoneyText(moneyTextToFloat(total));
+    alert(formattedText === total);
+    writeTotal(3.14);
+
+    function moneyTextToFloat(text) {
+        var cleanText = text.replace("R$ ", "").replace(",", ".");
+        return parseFloat(cleanText);
+    }
+
+    function floatToMoneyText(value) {
+        var text = (value < 1 ? "0" : "") + Math.floor(value * 100);
+        text = "R$ " + text;
+        return text.substr(0, text.length - 2) + "," + text.substr(-2);
+    }
+
+    function writeTotal(value) {
+        var total = document.getElementById("total");
+        total.innerHTML = floatToMoneyText(value);
+    }
 </script>
 
 </html>
